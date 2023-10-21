@@ -1,12 +1,11 @@
-import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Post({ id, title, author, publishedDate, shortDescription }) {
   const navigate = useNavigate();
 
-  const handleClick = useCallback(() => {
+  const handleClick = () => {
     navigate(`posts/${id}`);
-  }, [id]);
+  };
 
   return (
     <div className="col-12 col-md-4 g-3">
