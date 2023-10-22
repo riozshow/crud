@@ -4,6 +4,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { parseDate, handleError } from "../../utils/utils";
 import { useCallback } from "react";
+import { useSelector } from "react-redux";
 
 const defaultPost = {
   title: "",
@@ -23,6 +24,8 @@ function PostForm({ post = defaultPost, submit, children }) {
   } = useForm({
     defaultValues: { ...post, ...{ publishedDate: parseDate(post.publishedDate) } },
   });
+
+  const categories = useSelector((store) => store.categories);
 
   const InputField = useCallback(
     ({ fieldName, placeholder, options, as, type }) => {
@@ -56,6 +59,25 @@ function PostForm({ post = defaultPost, submit, children }) {
     [errors.content]
   );
 
+  const SelectField = useCallback(
+    ({ fieldName, selectableOptions, placeholder, options }) => {
+      return (
+        <>
+          <Form.Select {...register(fieldName, options)} isInvalid={errors[fieldName]}>
+            <option value={""}>{placeholder}</option>
+            {selectableOptions.map((selectable) => (
+              <option key={selectable.value} value={selectable.value}>
+                {selectable.title}
+              </option>
+            ))}
+          </Form.Select>
+          {handleError(errors[fieldName], options)}
+        </>
+      );
+    },
+    [errors]
+  );
+
   return (
     <Form onSubmit={handleSubmit(submit)} className="d-flex gap-2 flex-column">
       <InputField fieldName={"title"} placeholder={"Title"} options={{ required: true, minLength: 3 }} />
@@ -70,6 +92,12 @@ function PostForm({ post = defaultPost, submit, children }) {
         fieldName={"shortDescription"}
         placeholder={"Short description"}
         options={{ required: true, minLength: 20 }}
+      />
+      <SelectField
+        fieldName={"category"}
+        placeholder={"Select category..."}
+        selectableOptions={categories}
+        options={{ required: true }}
       />
       <EditorField placeholder={"Type post..."} options={{ required: true, minLength: 20 }} />
       <div className="align-self-start mt-3">{children}</div>

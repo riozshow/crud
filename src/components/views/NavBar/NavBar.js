@@ -11,6 +11,9 @@ function NavBar() {
       <Nav.Link as={NavLink} to="/" className="link-light">
         Home
       </Nav.Link>
+      <Nav.Link as={NavLink} to="/categories" className="link-light">
+        Categories
+      </Nav.Link>
       <Nav.Link as={NavLink} to="/about" className="link-light">
         About
       </Nav.Link>

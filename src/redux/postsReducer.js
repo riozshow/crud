@@ -1,7 +1,16 @@
 import { v4 } from "uuid";
+import { getCategoryTitle } from "./categoriesReducer";
 
 //selectors
-export const getPost = (state, id) => state.posts.find((post) => post.id === id);
+export const getPost = (state, id) => {
+  const post = state.posts.find((post) => post.id == id);
+  post.categoryName = getCategoryTitle(state, post.category);
+  return post;
+};
+
+export const getPostsByCategory = (state, id) =>
+  state.posts.filter((post) => post.category == id).map((post) => getPost(state, post.id));
+export const getAllPosts = (state) => state.posts.map((post) => getPost(state, post.id));
 
 // actions
 const createActionName = (actionName) => `app/posts/${actionName}`;

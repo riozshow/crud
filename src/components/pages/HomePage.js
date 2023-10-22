@@ -1,10 +1,11 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Post from "../features/Post";
+import { getAllPosts } from "../../redux/postsReducer";
+import PostList from "../views/PostList/PostList";
 
 function HomePage() {
   const navigate = useNavigate();
-  const posts = useSelector((state) => state.posts);
+  const posts = useSelector((state) => getAllPosts(state));
 
   return (
     <>
@@ -14,11 +15,7 @@ function HomePage() {
           Add post
         </button>
       </div>
-      <div className="row">
-        {posts.map((post) => (
-          <Post key={post.id} {...post} />
-        ))}
-      </div>
+      <PostList posts={posts} />
     </>
   );
 }

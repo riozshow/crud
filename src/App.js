@@ -9,6 +9,8 @@ import NavBar from "./components/views/NavBar/NavBar";
 import Footer from "./components/views/Footer/Footer";
 import PostAdd from "./components/features/PostAdd";
 import PostEdit from "./components/features/PostEdit";
+import CategoriesPage from "./components/pages/CategoriesPage";
+import CategoryPage from "./components/pages/CategoryPage";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/posts/add" element={<PostAdd />}></Route>
         <Route path="/posts/edit/:id" element={<PostEdit />}></Route>
         <Route path="/about" element={<AboutPage />}></Route>
+        <Route path="/categories" element={<CategoriesPage />}></Route>
+        <Route path="/categories/:id" element={<CategoryPage />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
       <Footer />

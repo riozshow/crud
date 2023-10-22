@@ -22,7 +22,7 @@ function PostPage() {
     return;
   }
 
-  const { title, author, publishedDate, content } = post;
+  const { title, author, publishedDate, content, categoryName } = post;
 
   return (
     <>
@@ -46,6 +46,10 @@ function PostPage() {
           <div className="d-flex gap-2">
             <p className="fw-bold">Published:</p>
             <p>{new Date(publishedDate).toLocaleDateString()}</p>
+          </div>
+          <div className="d-flex gap-2">
+            <p className="fw-bold">Author:</p>
+            <p>{categoryName}</p>
           </div>
         </div>
         <p dangerouslySetInnerHTML={{ __html: content }}></p>

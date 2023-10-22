@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
-function Post({ id, title, author, publishedDate, shortDescription }) {
+function Post({ id, title, author, publishedDate, shortDescription, categoryName }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`posts/${id}`);
+    navigate(`/posts/${id}`);
   };
 
   return (
@@ -18,6 +18,10 @@ function Post({ id, title, author, publishedDate, shortDescription }) {
         <div className="d-flex gap-2">
           <p className="fw-bold">Published:</p>
           <p>{new Date(publishedDate).toLocaleDateString()}</p>
+        </div>
+        <div className="d-flex gap-2">
+          <p className="fw-bold">Category:</p>
+          <p>{categoryName}</p>
         </div>
         <p className="opacity-75">{shortDescription}</p>
         <button className="btn btn-primary align-self-start" onClick={() => handleClick(id)}>
