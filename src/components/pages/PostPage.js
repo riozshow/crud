@@ -45,11 +45,10 @@ function PostPage() {
           </div>
           <div className="d-flex gap-2">
             <p className="fw-bold">Published:</p>
-            <p>{publishedDate}</p>
+            <p>{new Date(publishedDate).toLocaleDateString()}</p>
           </div>
         </div>
-
-        <p className="opacity-75">{content}</p>
+        <p dangerouslySetInnerHTML={{ __html: content }}></p>
       </div>
       <DeletePostModal id={id} show={deleteModal} hide={closeModal} />
     </>

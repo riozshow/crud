@@ -17,7 +17,7 @@ function Post({ id, title, author, publishedDate, shortDescription }) {
         </div>
         <div className="d-flex gap-2">
           <p className="fw-bold">Published:</p>
-          <p>{publishedDate}</p>
+          <p>{new Date(publishedDate).toLocaleDateString()}</p>
         </div>
         <p className="opacity-75">{shortDescription}</p>
         <button className="btn btn-primary align-self-start" onClick={() => handleClick(id)}>

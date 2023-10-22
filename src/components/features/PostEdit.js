@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getPost } from "../../redux/postsReducer";
-import { useState } from "react";
 import PostForm from "../features/PostForm";
 import { editPost } from "../../redux/postsReducer";
 import { Button } from "react-bootstrap";
@@ -12,9 +11,8 @@ function PostEdit() {
 
   const { id } = useParams();
   const selectedPost = useSelector((state) => getPost(state, id));
-  const [post, setPost] = useState(selectedPost);
 
-  const handleSavePost = () => {
+  const handleSavePost = (post) => {
     dispatch(editPost(post));
     navigate("/");
   };
@@ -22,7 +20,7 @@ function PostEdit() {
   return (
     <div className="d-flex flex-column gap-3 max-width m-auto">
       <h4>Edit Post</h4>
-      <PostForm post={post} setPost={setPost} submit={() => handleSavePost()}>
+      <PostForm post={selectedPost} submit={(post) => handleSavePost(post)}>
         <Button type="submit">Save post</Button>
       </PostForm>
     </div>
